@@ -411,7 +411,7 @@ class DseNode(Node):
 
     def _get_directories(self):
         dirs = []
-        for i in ['data', 'commitlogs', 'saved_caches', 'logs', 'bin', 'keys', 'resources', os.path.join('data', 'hints')]:
+        for i in ['data', 'commitlogs', 'saved_caches', 'logs', 'bin', 'keys', 'resources', os.path.join('data', 'hints'), 'persistent_settings']:
             dirs.append(os.path.join(self.get_path(), i))
         return dirs
 

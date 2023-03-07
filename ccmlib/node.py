@@ -752,7 +752,7 @@ class Node(object):
         """
         if jvm_args is None:
             jvm_args = []
-
+        
         if set_migration_task and self.cluster.cassandra_version() >= '3.0.1':
             jvm_args += ['-Dcassandra.migration_task_wait_in_seconds={}'.format(len(self.cluster.nodes) * 2)]
 
@@ -1721,6 +1721,7 @@ class Node(object):
         data['data_file_directories'] = [os.path.join(self.get_path(), 'data{0}'.format(x)) for x in xrange(0, self.cluster.data_dir_count)]
         data['commitlog_directory'] = os.path.join(self.get_path(), 'commitlogs')
         data['saved_caches_directory'] = os.path.join(self.get_path(), 'saved_caches')
+        data['persistent_settings_directory'] = os.path.join(self.get_path(), 'persistent_settings')
 
         if 'metadata_directory' in data:
             data['metadata_directory'] = os.path.join(self.get_path(), 'metadata')
@@ -1986,7 +1987,7 @@ class Node(object):
 
     def _get_directories(self):
         dirs = []
-        for i in ['commitlogs', 'saved_caches', 'logs', 'conf', 'bin', 'hints']:
+        for i in ['commitlogs', 'saved_caches', 'logs', 'conf', 'bin', 'hints', 'persistent_settings']:
             dirs.append(os.path.join(self.get_path(), i))
         for x in xrange(0, self.cluster.data_dir_count):
             dirs.append(os.path.join(self.get_path(), 'data{0}'.format(x)))
