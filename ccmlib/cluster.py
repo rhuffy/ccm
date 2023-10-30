@@ -47,6 +47,8 @@ class Cluster(object):
         self._trace = []
         self.data_dir_count = 1
 
+        self._environment_variables["NO_ASSERT_JVM_VERSION"] = "1"
+
         if self.name.lower() == "current":
             raise RuntimeError("Cannot name a cluster 'current'.")
 
@@ -502,6 +504,9 @@ class Cluster(object):
               quiet_start=False, allow_root=False, jvm_version=None, **kwargs):
         if jvm_args is None:
             jvm_args = []
+
+        jvm_args.append("-XX:+IgnoreUnrecognizedVMOptions")
+        jvm_args.append("-Dpalantir_cassandra.disable_wait_to_bootstrap=true")
 
         extension.pre_cluster_start(self)
 
