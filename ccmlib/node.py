@@ -152,7 +152,7 @@ class Node(object):
         self.__original_java_home = None
         self.__conf_updated = False
 
-        self._environment_variables["NO_ASSERT_JVM_VERSION"] = "1"
+        self.__environment_variables["NO_ASSERT_JVM_VERSION"] = "1"
 
         if derived_cassandra_version:
             self._cassandra_version = derived_cassandra_version
